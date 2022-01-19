@@ -1,6 +1,6 @@
-;=============================自身功能配置=============================;;
+;;=============================自身功能配置=============================;;
 ;; 隐藏菜单栏
-;(menu-bar-mode 1)  
+;(menu-bar-mode 1)
 ;; 取消工具栏
 ;;(tool-bar-mode nil)
 ;; 取消滚动栏
@@ -15,6 +15,19 @@
                  "%b"))))
 ;;关闭emacs启动时的画面
 (setq inhibit-startup-message t)
+
+;; 快速向下移动行
+(global-set-key (kbd "M-n")
+  (lambda ()
+    (interactive)
+    (next-line 3)))
+
+;;快速向上移动行
+(global-set-key (kbd "M-p")
+  (lambda ()
+    (interactive)
+    (previous-line 3)))
+
 ;;关闭gnus启动时的画面
 (setq gnus-inhibit-startup-message t)
 ;; 设置启动时窗口的长宽
@@ -35,13 +48,13 @@
 ;(global-set-key (kbd "C-c <left>") 'winner-undo)
 ;(global-set-key (kbd "C-c <right>") 'winner-redo)
 ;;打开括号匹配显示模式
-(setq show-paren-mode t) 
+(setq show-paren-mode t)
 ;;括号匹配时可以高亮显示另外一边的括号，但光标不会烦人的跳到另一个括号处
 (setq show-paren-style 'parenthesis)
 ;;光标靠近鼠标指针时，让鼠标指针自动让开，别挡住视线
 ;(setq mouse-avoidance-mode 'animate)
 ;;ido的配置,这个可以使你在用C-x C-f打开文件的时候在后面有提示,这里将其关闭
-;(ido-mode t)
+(ido-mode t)
 ;;ido模式不保存目录列表
 ;(setq ido-save-directory-list-file nil)
 ;; 设置tab宽度
@@ -91,6 +104,12 @@
 ;; CEDET
 (global-ede-mode 1)      ; 全局启用CEDET
 (semantic-mode 1)
+(semanticdb-enable-gnu-global-databases 'c-mode)
+(semanticdb-enable-gnu-global-databases 'c++-mode)
+;; 终端下启用鼠标操作
+(xterm-mouse-mode 1)
+;; flycheck
+(global-flycheck-mode 1)
 ;;=============================程序生成的配置============================;;
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -103,8 +122,14 @@
  '(gud-gdb-command-name "gdb --annotate=1")
  '(indent-tabs-mode nil)
  '(large-file-warning-threshold nil)
- '(package-selected-packages '(company-tabnine))
+ '(package-selected-packages '(flycheck avy company-tabnine))
  '(show-paren-mode t)
  '(tab-width 4)
  '(tool-bar-mode nil))
 ;;(set-default-font "Monaco")
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
