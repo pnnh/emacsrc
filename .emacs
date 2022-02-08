@@ -1,6 +1,6 @@
 ;;=============================自身功能配置=============================;;
 ;; 隐藏菜单栏
-;(menu-bar-mode 1)
+;(menu-bar-mode 1)  
 ;; 取消工具栏
 ;;(tool-bar-mode nil)
 ;; 取消滚动栏
@@ -48,7 +48,7 @@
 ;(global-set-key (kbd "C-c <left>") 'winner-undo)
 ;(global-set-key (kbd "C-c <right>") 'winner-redo)
 ;;打开括号匹配显示模式
-(setq show-paren-mode t)
+(setq show-paren-mode t) 
 ;;括号匹配时可以高亮显示另外一边的括号，但光标不会烦人的跳到另一个括号处
 (setq show-paren-style 'parenthesis)
 ;;光标靠近鼠标指针时，让鼠标指针自动让开，别挡住视线
@@ -84,6 +84,11 @@
 (setq visible-bell nil)
 ;;以免占用输入法切换快捷键
 (global-unset-key (kbd "C-SPC"))
+;;======================快捷键
+;; 设置通过F1执行命令
+(global-set-key (kbd "<f1>") 'execute-extended-command)
+;; cua-mode
+(cua-mode t)
 ;;源配置
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
@@ -110,6 +115,8 @@
 (xterm-mouse-mode 1)
 ;; flycheck
 (global-flycheck-mode 1)
+;; 光标改成竖线
+(setq-default cursor-type 'bar)
 ;;=============================程序生成的配置============================;;
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -120,9 +127,9 @@
  '(company-tabnine-show-annotation nil)
  '(display-time-mode t)
  '(gud-gdb-command-name "gdb --annotate=1")
- '(indent-tabs-mode nil)
+ '(indent-tabs-mode t)
  '(large-file-warning-threshold nil)
- '(package-selected-packages '(flycheck avy company-tabnine))
+ '(package-selected-packages '(sr-speedbar flycheck avy company-tabnine))
  '(show-paren-mode t)
  '(tab-width 4)
  '(tool-bar-mode nil))
@@ -133,3 +140,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+;;==================插件===================;;
+;; sr-speedbar
+(require 'sr-speedbar)
+;(setq sr-speedbar-right-side nil)
+;(setq sr-speedbar-width 25)
+										;(setq dframe-update-speed t)
+(setq speedbar-show-unknown-files t)
+(global-set-key (kbd "<f5>") (lambda() (interactive) (sr-speedbar-toggle)))
