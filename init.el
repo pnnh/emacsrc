@@ -1,20 +1,33 @@
-;=============================自身功能配置=============================;;
+;;=============================自身功能配置=============================;;
 ;; 隐藏菜单栏
-;(menu-bar-mode 1)  
+;(menu-bar-mode 1)
 ;; 取消工具栏
-;;(tool-bar-mode nil)
+(tool-bar-mode nil)
 ;; 取消滚动栏
 ;;(set-scroll-bar-mode nil)
 ;; 显示行列号,它显示在minibuffer上面那个杠上
 (setq column-number-mode t)
-(setq line-number-mode t)
+(setq line-number-mode 1)
 ;; 设置标题栏
 (setq frame-title-format
       '((:eval (if (buffer-file-name)
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))))
-;;关闭emacs启动时的画面
+;; 关闭emacs启动时的画面
 (setq inhibit-startup-message t)
+
+;; 快速向下移动行
+(global-set-key (kbd "M-n")
+  (lambda ()
+    (interactive)
+    (next-line 3)))
+
+;;快速向上移动行
+(global-set-key (kbd "M-p")
+  (lambda ()
+    (interactive)
+    (previous-line 3)))
+
 ;;关闭gnus启动时的画面
 (setq gnus-inhibit-startup-message t)
 ;; 设置启动时窗口的长宽
@@ -28,20 +41,24 @@
 ;;隐藏*scratch*模式下的This buffer is for notes you don't want to save ...提示
 (setq initial-scratch-message "")
 ;; 启用windmove，可以使用alt+方向键切换窗口
+;(global-unset-key (kbd "ESC <right>"))
+										;(windmove-default-keybindings)
 ;(windmove-default-keybindings 'meta)
+(global-set-key (kbd "M-b")  'windmove-left)
+(global-set-key (kbd "M-f") 'windmove-right)
+(global-set-key (kbd "M-p")    'windmove-up)
+(global-set-key (kbd "M-n")  'windmove-down)
 ; 启用winner-mode，可以使用super+方向键切换布局
 ;(setq winner-dont-bind-my-keys t)
 ;(winner-mode t)
 ;(global-set-key (kbd "C-c <left>") 'winner-undo)
 ;(global-set-key (kbd "C-c <right>") 'winner-redo)
 ;;打开括号匹配显示模式
-(setq show-paren-mode t) 
+(setq show-paren-mode t)
 ;;括号匹配时可以高亮显示另外一边的括号，但光标不会烦人的跳到另一个括号处
 (setq show-paren-style 'parenthesis)
-;;光标靠近鼠标指针时，让鼠标指针自动让开，别挡住视线
-;(setq mouse-avoidance-mode 'animate)
 ;;ido的配置,这个可以使你在用C-x C-f打开文件的时候在后面有提示,这里将其关闭
-;(ido-mode t)
+(ido-mode t)
 ;;ido模式不保存目录列表
 ;(setq ido-save-directory-list-file nil)
 ;; 设置tab宽度
@@ -71,14 +88,52 @@
 (setq visible-bell nil)
 ;;以免占用输入法切换快捷键
 (global-unset-key (kbd "C-SPC"))
+;;======================快捷键
+;; 设置通过F1执行命令
+(global-set-key (kbd "<f1>") 'execute-extended-command)
+;; 设置通过F2执行goto char
+(global-set-key (kbd "<f2>") 'avy-goto-char)
+;; cua-mode
+(cua-mode t)
 ;;源配置
 (require 'package)
-;;(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
-;(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-;  ("marmalade" . "http://marmalade-repo.org/packages/")
-;  ("melpa" . "http://melpa.org/packages/")))
-;;(package-initialize)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+
+(setq package-list
+      '(company flycheck sr-speedbar))
+
+(package-initialize)
+; fetch the list of packages available 
+(unless package-archive-contents
+  (package-refresh-contents))
+
+; install the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+
+; company 配置
+(load-file (expand-file-name "packages/company.el" user-emacs-directory))
+
+;; CEDET
+(global-ede-mode 1)      ; 全局启用CEDET
+(semantic-mode 1)
+(semanticdb-enable-gnu-global-databases 'c-mode)
+(semanticdb-enable-gnu-global-databases 'c++-mode)
+;;=========================鼠标配置====================;;
+;; 终端下启用鼠标操作，需要在iterm2中启用mouse reporting
+;; 之后正常鼠标选择是操作emacs选区，Alt+鼠标左键选择是操作系统选区
+(xterm-mouse-mode 1)
+(defun track-mouse (e))
+(setq mouse-sel-mode t)
+;;光标靠近鼠标指针时，让鼠标指针自动让开，别挡住视线
+(setq mouse-avoidance-mode 'animate)
+;; (electric-indent-mode -1) ;; 禁用该模式，否则在按回车换行时，上一行会缩进比较多
+(setq x-select-enable-clipboard t)
+;; flycheck
+(global-flycheck-mode 1)
+;; 光标改成竖线
+(setq-default cursor-type 'bar)
 ;;=============================程序生成的配置============================;;
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -86,12 +141,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
- '(cua-mode t nil (cua-base))
+ '(company-tabnine-show-annotation nil)
  '(display-time-mode t)
  '(gud-gdb-command-name "gdb --annotate=1")
- '(indent-tabs-mode nil)
+ '(indent-tabs-mode t)
  '(large-file-warning-threshold nil)
+ '(package-selected-packages
+   '(go-mode flymake-go flycheck-golangci-lint sr-speedbar flycheck avy company-tabnine))
  '(show-paren-mode t)
+ '(speedbar-supported-extension-expressions
+   '(".[ch]\\(\\+\\+\\|pp\\|c\\|h\\|xx\\)?" ".tex\\(i\\(nfo\\)?\\)?" ".el" ".emacs" ".l" ".lsp" ".p" ".java" ".js" ".f\\(90\\|77\\|or\\)?" ".ad[abs]" ".p[lm]" ".tcl" ".m" ".scm" ".pm" ".py" ".g" ".s?html" ".ma?k" "[Mm]akefile\\(\\.in\\)?" ".go"))
  '(tab-width 4)
  '(tool-bar-mode nil))
 ;;(set-default-font "Monaco")
@@ -101,3 +160,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+;;==================插件===================;;
+;; sr-speedbar
+(require 'sr-speedbar)
+;(setq sr-speedbar-right-side nil)
+;(setq sr-speedbar-width 25)
+										;(setq dframe-update-speed t)
+(setq speedbar-show-unknown-files t)
+(global-set-key (kbd "<f5>") (lambda() (interactive) (sr-speedbar-toggle)))
