@@ -2,3 +2,5 @@ backups/
 elpa/
 auto-save-list/
 network-security.data
+semanticdb/
+ede-projects.el

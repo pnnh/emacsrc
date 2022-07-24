@@ -1,8 +1,6 @@
 ;;=============================自身功能配置=============================;;
 ;; 隐藏菜单栏
 ;(menu-bar-mode 1)
-;; 取消工具栏
-(tool-bar-mode nil)
 ;; 取消滚动栏
 ;;(set-scroll-bar-mode nil)
 (custom-set-variables
@@ -138,6 +136,10 @@
 (global-flycheck-mode 1)
 ;; 光标改成竖线
 (setq-default cursor-type 'bar)
+
+; 设置将程序自动添加的配置写到别的文件
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
 
 ; company 配置
 (load-file (expand-file-name "packages/company.el" user-emacs-directory))
