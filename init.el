@@ -5,6 +5,18 @@
 (tool-bar-mode nil)
 ;; 取消滚动栏
 ;;(set-scroll-bar-mode nil)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
+ '(display-time-mode t)
+ '(indent-tabs-mode t)
+ '(large-file-warning-threshold nil)
+ '(show-paren-mode t)
+ '(tab-width 4)
+ '(tool-bar-mode nil))
 ;; 显示行列号,它显示在minibuffer上面那个杠上
 (setq column-number-mode t)
 (setq line-number-mode 1)
@@ -89,10 +101,12 @@
 ;;以免占用输入法切换快捷键
 (global-unset-key (kbd "C-SPC"))
 ;;======================快捷键
-;; 设置通过F1执行命令
-(global-set-key (kbd "<f1>") 'execute-extended-command)
-;; 设置通过F2执行goto char
-(global-set-key (kbd "<f2>") 'avy-goto-char)
+;; 设置执行命令
+(global-set-key (kbd "<f2>") 'execute-extended-command)
+;; 设置执行goto char
+(global-set-key (kbd "<f1>") 'avy-goto-char)
+;;======================字体配置=====================;;
+(set-frame-font "Monaco 13")
 ;; cua-mode
 (cua-mode t)
 ;;源配置
@@ -100,7 +114,8 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
 (setq package-list
-      '(company flycheck sr-speedbar))
+      '(company flycheck sr-speedbar
+				go-mode flymake-go flycheck-golangci-lint avy))
 
 (package-initialize)
 ; fetch the list of packages available 
@@ -112,59 +127,35 @@
   (unless (package-installed-p package)
     (package-install package)))
 
-; company 配置
-(load-file (expand-file-name "packages/company.el" user-emacs-directory))
 
 ;; CEDET
 (global-ede-mode 1)      ; 全局启用CEDET
 (semantic-mode 1)
 (semanticdb-enable-gnu-global-databases 'c-mode)
 (semanticdb-enable-gnu-global-databases 'c++-mode)
-;;=========================鼠标配置====================;;
-;; 终端下启用鼠标操作，需要在iterm2中启用mouse reporting
-;; 之后正常鼠标选择是操作emacs选区，Alt+鼠标左键选择是操作系统选区
-(xterm-mouse-mode 1)
-(defun track-mouse (e))
-(setq mouse-sel-mode t)
-;;光标靠近鼠标指针时，让鼠标指针自动让开，别挡住视线
-(setq mouse-avoidance-mode 'animate)
 ;; (electric-indent-mode -1) ;; 禁用该模式，否则在按回车换行时，上一行会缩进比较多
-(setq x-select-enable-clipboard t)
 ;; flycheck
 (global-flycheck-mode 1)
 ;; 光标改成竖线
 (setq-default cursor-type 'bar)
+
+; company 配置
+(load-file (expand-file-name "packages/company.el" user-emacs-directory))
+; 鼠标配置
+(load-file (expand-file-name "packages/mouse.el" user-emacs-directory))
+; sr-speedbar 配置
+(load-file (expand-file-name "packages/speedbar.el" user-emacs-directory))
 ;;=============================程序生成的配置============================;;
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(company-tabnine-show-annotation nil)
- '(display-time-mode t)
  '(gud-gdb-command-name "gdb --annotate=1")
- '(indent-tabs-mode t)
- '(large-file-warning-threshold nil)
  '(package-selected-packages
-   '(go-mode flymake-go flycheck-golangci-lint sr-speedbar flycheck avy company-tabnine))
- '(show-paren-mode t)
- '(speedbar-supported-extension-expressions
-   '(".[ch]\\(\\+\\+\\|pp\\|c\\|h\\|xx\\)?" ".tex\\(i\\(nfo\\)?\\)?" ".el" ".emacs" ".l" ".lsp" ".p" ".java" ".js" ".f\\(90\\|77\\|or\\)?" ".ad[abs]" ".p[lm]" ".tcl" ".m" ".scm" ".pm" ".py" ".g" ".s?html" ".ma?k" "[Mm]akefile\\(\\.in\\)?" ".go"))
- '(tab-width 4)
- '(tool-bar-mode nil))
-;;(set-default-font "Monaco")
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-;;==================插件===================;;
-;; sr-speedbar
-(require 'sr-speedbar)
-;(setq sr-speedbar-right-side nil)
-;(setq sr-speedbar-width 25)
-										;(setq dframe-update-speed t)
-(setq speedbar-show-unknown-files t)
-(global-set-key (kbd "<f5>") (lambda() (interactive) (sr-speedbar-toggle)))
+   '(go-mode flymake-go flycheck-golangci-lint sr-speedbar flycheck avy))
+)
+
+
+
+
