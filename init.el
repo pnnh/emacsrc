@@ -113,7 +113,7 @@
 
 (setq package-list
       '(company flycheck sr-speedbar
-				go-mode flymake-go flycheck-golangci-lint avy))
+				go-mode flymake-go flycheck-golangci-lint avy eglot))
 
 (package-initialize)
 ; fetch the list of packages available 
@@ -147,6 +147,8 @@
 (load-file (expand-file-name "packages/mouse.el" user-emacs-directory))
 ; sr-speedbar 配置
 (load-file (expand-file-name "packages/speedbar.el" user-emacs-directory))
+; eglot C/C++ LSP Server 配置
+(load-file (expand-file-name "packages/eglot.el" user-emacs-directory))
 ;;=============================程序生成的配置============================;;
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
