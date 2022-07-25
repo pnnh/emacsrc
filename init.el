@@ -4,10 +4,6 @@
 ;; 取消滚动栏
 ;;(set-scroll-bar-mode nil)
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(display-time-mode t)
  '(indent-tabs-mode t)
@@ -26,18 +22,6 @@
 ;; 关闭emacs启动时的画面
 (setq inhibit-startup-message t)
 
-;; 快速向下移动行
-(global-set-key (kbd "M-n")
-  (lambda ()
-    (interactive)
-    (next-line 3)))
-
-;;快速向上移动行
-(global-set-key (kbd "M-p")
-  (lambda ()
-    (interactive)
-    (previous-line 3)))
-
 ;;关闭gnus启动时的画面
 (setq gnus-inhibit-startup-message t)
 ;; 设置启动时窗口的长宽
@@ -50,19 +34,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 ;;隐藏*scratch*模式下的This buffer is for notes you don't want to save ...提示
 (setq initial-scratch-message "")
-;; 启用windmove，可以使用alt+方向键切换窗口
-;(global-unset-key (kbd "ESC <right>"))
-										;(windmove-default-keybindings)
-;(windmove-default-keybindings 'meta)
-(global-set-key (kbd "M-b")  'windmove-left)
-(global-set-key (kbd "M-f") 'windmove-right)
-(global-set-key (kbd "M-p")    'windmove-up)
-(global-set-key (kbd "M-n")  'windmove-down)
-; 启用winner-mode，可以使用super+方向键切换布局
-;(setq winner-dont-bind-my-keys t)
-;(winner-mode t)
-;(global-set-key (kbd "C-c <left>") 'winner-undo)
-;(global-set-key (kbd "C-c <right>") 'winner-redo)
+
 ;;打开括号匹配显示模式
 (setq show-paren-mode t)
 ;;括号匹配时可以高亮显示另外一边的括号，但光标不会烦人的跳到另一个括号处
@@ -96,13 +68,7 @@
 (setq warning-minimum-level :emergency)
 ;; 报警时不再出现警告图标
 (setq visible-bell nil)
-;;以免占用输入法切换快捷键
-(global-unset-key (kbd "C-SPC"))
-;;======================快捷键
-;; 设置执行命令
-(global-set-key (kbd "<f2>") 'execute-extended-command)
-;; 设置执行goto char
-(global-set-key (kbd "<f1>") 'avy-goto-char)
+
 ;;======================字体配置=====================;;
 (set-frame-font "Monaco 13")
 ;; cua-mode
@@ -113,7 +79,7 @@
 
 (setq package-list
       '(company flycheck sr-speedbar
-				go-mode flymake-go flycheck-golangci-lint avy eglot))
+				go-mode flymake-go flycheck-golangci-lint avy eglot cmake-mode))
 
 (package-initialize)
 ; fetch the list of packages available 
@@ -124,7 +90,6 @@
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
-
 
 ;; CEDET
 (global-ede-mode 1)      ; 全局启用CEDET
@@ -141,6 +106,8 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
+; 快捷键配置，包括调用插件相关的快捷键
+(load-file (expand-file-name "packages/shortcuts.el" user-emacs-directory))
 ; company 配置
 (load-file (expand-file-name "packages/company.el" user-emacs-directory))
 ; 鼠标配置
@@ -150,15 +117,7 @@
 ; eglot C/C++ LSP Server 配置
 (load-file (expand-file-name "packages/eglot.el" user-emacs-directory))
 ;;=============================程序生成的配置============================;;
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(gud-gdb-command-name "gdb --annotate=1")
- '(package-selected-packages
-   '(go-mode flymake-go flycheck-golangci-lint sr-speedbar flycheck avy))
-)
+
 
 
 
