@@ -13,7 +13,7 @@
   '(indent-tabs-mode t)
  '(tab-width 4)
   '(tool-bar-mode t))
- '(cua-mode t))
+ '(cua-mode t)
 ;; 显示行列号,它显示在minibuffer上面那个杠上
 (setq column-number-mode t)
 (setq line-number-mode 1)
@@ -27,8 +27,7 @@
 
 ;;关闭gnus启动时的画面
 (setq gnus-inhibit-startup-message t)
-;; 设置启动时窗口的长宽
-(setq initial-frame-alist '((width . 165) (height . 45)))
+
 ;;关闭出错时的提示声
 ;(setq visible-bell t)
 ;;设置打开文件的缺省路径,默认的路径为“～/”
@@ -57,16 +56,7 @@
 (set-face-background 'mode-line "#e5e5e5")
 ;(set-face-foreground 'mode-line-inactive "#606060")
 ;(set-face-background 'mode-line-inactive "#202020")
-;;------自动保存/备份有关配置--------;;
-(defvar backup-dir (expand-file-name "~/.emacs.d/backups"))
-(setq version-control t ; 多次备份
-      kept-new-versions 3 ; 保留最近的3个备份文件
-      kept-old-versions 2 ; 保留最早的2个备份文件
-      delete-old-versions t ; 自动删除旧的备份文件
-      backup-by-copying t ; 自动备份
-      backup-directory-alist `((".*" . ,backup-dir))	     ; 自动备份目录
-      vc-make-backup-files t ; 使用版本控制时仍启用备份
-      auto-save-file-name-transforms `((".*" ,backup-dir t))) ; 自动保存目录
+
 ;; 警告信息配置
 (setq warning-minimum-level :emergency)
 ;; 报警时不再出现警告图标
