@@ -7,10 +7,13 @@
  '(column-number-mode t)
  '(display-time-mode t)
  '(indent-tabs-mode t)
+ '(global-display-line-numbers-mode t)
  '(large-file-warning-threshold nil)
  '(show-paren-mode t)
+  '(indent-tabs-mode t)
  '(tab-width 4)
- '(tool-bar-mode nil))
+  '(tool-bar-mode t))
+ '(cua-mode t))
 ;; 显示行列号,它显示在minibuffer上面那个杠上
 (setq column-number-mode t)
 (setq line-number-mode 1)
@@ -106,15 +109,21 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
+;;=============================编辑器自身配置============================;;
+; 加载基本配置
+(load-file (expand-file-name "packages/base.el" user-emacs-directory))
 ; 快捷键配置，包括调用插件相关的快捷键
 (load-file (expand-file-name "packages/shortcuts.el" user-emacs-directory))
-; company 配置
-(load-file (expand-file-name "packages/company.el" user-emacs-directory))
 ; 鼠标配置
 (load-file (expand-file-name "packages/mouse.el" user-emacs-directory))
-; sr-speedbar 配置
+; 工具栏配置
+(load-file (expand-file-name "packages/toolbar.el" user-emacs-directory))
+;;=============================插件配置============================;;
+; company配置
+(load-file (expand-file-name "packages/company.el" user-emacs-directory))
+; sr-speedbar配置
 (load-file (expand-file-name "packages/speedbar.el" user-emacs-directory))
-; eglot C/C++ LSP Server 配置
+; eglot C/C++ LSP Server配置
 (load-file (expand-file-name "packages/eglot.el" user-emacs-directory))
 ;;=============================程序生成的配置============================;;
 
