@@ -10,18 +10,13 @@
  '(global-display-line-numbers-mode t)
  '(large-file-warning-threshold nil)
  '(show-paren-mode t)
-  '(indent-tabs-mode t)
+ '(indent-tabs-mode t)
  '(tab-width 4)
-  '(tool-bar-mode t))
+ '(tool-bar-mode t))
  '(cua-mode t)
 ;; 显示行列号,它显示在minibuffer上面那个杠上
 (setq column-number-mode t)
 (setq line-number-mode 1)
-;; 设置标题栏
-(setq frame-title-format
-      '((:eval (if (buffer-file-name)
-                   (abbreviate-file-name (buffer-file-name))
-                 "%b"))))
 ;; 关闭emacs启动时的画面
 (setq inhibit-startup-message t)
 
