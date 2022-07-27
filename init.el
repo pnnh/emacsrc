@@ -67,7 +67,8 @@
 
 (setq package-list
       '(company flycheck sr-speedbar
-				go-mode flymake-go flycheck-golangci-lint avy eglot cmake-mode))
+				go-mode flycheck-golangci-lint avy eglot cmake-mode 
+        use-package))
 
 (package-initialize)
 ; fetch the list of packages available 
@@ -103,8 +104,8 @@
 (load-file (expand-file-name "packages/mouse.el" user-emacs-directory))
 ; 工具栏配置
 (load-file (expand-file-name "packages/toolbar.el" user-emacs-directory))
-; 加载Native Compile配置
-(load-file (expand-file-name "packages/native-comp.el" user-emacs-directory))
+; 加载Native Compile配置 
+(load-file (expand-file-name "packages/native-comp.el" user-emacs-directory)) 
 ;;=============================插件配置============================;;
 ; company配置
 (load-file (expand-file-name "packages/company.el" user-emacs-directory))
