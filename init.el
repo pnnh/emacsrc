@@ -32,25 +32,6 @@
 ;;隐藏*scratch*模式下的This buffer is for notes you don't want to save ...提示
 (setq initial-scratch-message "")
 
-;;打开括号匹配显示模式
-(setq show-paren-mode t)
-;;括号匹配时可以高亮显示另外一边的括号，但光标不会烦人的跳到另一个括号处
-(setq show-paren-style 'parenthesis)
-;;ido的配置,这个可以使你在用C-x C-f打开文件的时候在后面有提示,这里将其关闭
-(ido-mode t)
-;;ido模式不保存目录列表
-;(setq ido-save-directory-list-file nil)
-;; 设置tab宽度
-(display-time-mode 1) ;; 显示时间
-(setq display-time-24hr-format t) ;; 24小时格式
-(setq display-time-day-and-date t) ;; 显示日期
-(setq column-number-mode t) ;; 显示列号
-(setq line-number-mode t) ;; 显示行号
-;; 状态栏颜色配置
-;(set-face-foreground 'mode-line "#000000")
-(set-face-background 'mode-line "#e5e5e5")
-;(set-face-foreground 'mode-line-inactive "#606060")
-;(set-face-background 'mode-line-inactive "#202020")
 
 ;; 警告信息配置
 (setq warning-minimum-level :emergency)
@@ -65,11 +46,10 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
+;; 将期望的插件列表添加到package-list，并确保安装（需要在执行下方插件相关初始化配置之前进行）
 (setq package-list
-      '(company flycheck sr-speedbar
-				go-mode flycheck-golangci-lint avy eglot cmake-mode 
-        use-package))
-
+      '(company sr-speedbar go-mode avy eglot cmake-mode use-package counsel
+        flycheck flycheck-golangci-lint))
 (package-initialize)
 ; fetch the list of packages available 
 (unless package-archive-contents
@@ -86,8 +66,7 @@
 (semanticdb-enable-gnu-global-databases 'c-mode)
 (semanticdb-enable-gnu-global-databases 'c++-mode)
 ;; (electric-indent-mode -1) ;; 禁用该模式，否则在按回车换行时，上一行会缩进比较多
-;; flycheck
-(global-flycheck-mode 1)
+
 ;; 光标改成竖线
 (setq-default cursor-type 'bar)
 
@@ -111,8 +90,14 @@
 (load-file (expand-file-name "packages/company.el" user-emacs-directory))
 ; sr-speedbar配置
 (load-file (expand-file-name "packages/speedbar.el" user-emacs-directory))
+; flycheck配置
+(load-file (expand-file-name "packages/flycheck.el" user-emacs-directory))
 ; eglot C/C++ LSP Server配置
 (load-file (expand-file-name "packages/eglot.el" user-emacs-directory))
+; counsel、ivy、swiper配置
+(load-file (expand-file-name "packages/counsel.el" user-emacs-directory))
+; 其它插件集合配置
+(load-file (expand-file-name "packages/other.el" user-emacs-directory))
 ;;=============================程序生成的配置============================;;
 
 

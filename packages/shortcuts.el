@@ -22,10 +22,12 @@
 ;(global-set-key (kbd "C-c <right>") 'winner-redo)
 ;;以免占用输入法切换快捷键
 (global-unset-key (kbd "C-SPC"))
-;;======================快捷键
+;;======================快捷键=============;;
 ;; 设置执行goto char
 (global-set-key (kbd "<f1>") 'avy-goto-char)
 ;; 设置执行命令
 ;(global-set-key (kbd "<f2>") 'execute-extended-command)
+;;====================================sr-speedbar相关配置==================================;;
 ; 快速打开speedbar，查看文件大纲
-(global-set-key (kbd "<f2>") 'sr-speedbar-toggle)
+;;(global-set-key (kbd "<f2>") 'sr-speedbar-toggle)
+(global-set-key (kbd "<f5>") (lambda() (interactive) (sr-speedbar-toggle)))
