@@ -3,6 +3,8 @@ ZSH_THEME="robbyrussell"
 plugins=(z zsh-interactive-cd zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
+# 禁止AUTO_C，否则当命令和子目录重名时会自动进入子目录
+unsetopt AUTO_CD
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR='emacs'
