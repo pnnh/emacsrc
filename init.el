@@ -46,23 +46,21 @@
 ;;======================包管理配置=====================;; 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-;; 确保安装use-package，用于对其它包的延迟加载
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-;; 将期望的插件列表添加到package-list，并确保安装（需要在执行下方插件相关初始化配置之前进行）
-(setq package-list
-      '(company sr-speedbar go-mode avy cmake-mode use-package counsel
-        flycheck flycheck-golangci-lint))
 (package-initialize)
+
 ; fetch the list of packages available 
 (unless package-archive-contents
   (package-refresh-contents))
 
-; install the missing packages
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
+;; 将期望的插件列表添加到package-list，并确保安装（需要在执行下方插件相关初始化配置之前进行）
+;; (setq package-list
+;;       '(use-package avy cmake-mode))
+;; ; install the missing packages
+;; (dolist (package package-list)
+;;   (unless (package-installed-p package)
+;;     (package-install package)))
+(when (not (package-installed-p 'use-package))
+  (package-install 'use-package))
 
 ;; 配置benchmark插件以跟踪启动过程
 (use-package benchmark-init

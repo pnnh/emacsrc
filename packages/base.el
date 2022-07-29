@@ -10,24 +10,24 @@
 ; 默认窗口宽度（设置对emacsclient也有效果）
 ;(add-to-list 'default-frame-alist '(width . 170))
 ; 设置默认窗口宽高及位置（对emacsclient也有效果）
-(setq default-frame-alist
-       '((height . 50)
-         (width . 170)
-         (left . 240)
-         (top . 120)
-         ;(vertical-scroll-bars . nil)
-         ;(horizontal-scroll-bars . nil)
-         ;(tool-bar-lines . 0))
-))
+;; (setq default-frame-alist
+;;        '((height . 50)
+;;          (width . 170)
+;;          (left . 240)
+;;          (top . 120)
+;;          ;(vertical-scroll-bars . nil)
+;;          ;(horizontal-scroll-bars . nil)
+;;          ;(tool-bar-lines . 0))
+;; ))
 
 ;设置窗口宽和高
-;;(set-frame-width (selected-frame) 170)
+(set-frame-width (selected-frame) 170)
 
-;;(if (eq system-type 'darwin)
-;;    (set-frame-height (selected-frame) 50))
+(if (eq system-type 'darwin)
+   (set-frame-height (selected-frame) 50))
 
-;;(if (eq system-type 'gnu/linux)
-;;    (set-frame-height (selected-frame) 50))
+(if (eq system-type 'gnu/linux)
+   (set-frame-height (selected-frame) 50))
 
 ;;打开括号匹配显示模式
 (setq show-paren-mode t)
@@ -43,6 +43,7 @@
 (setq display-time-day-and-date t) ;; 显示日期
 (setq column-number-mode t) ;; 显示列号
 (setq line-number-mode t) ;; 显示行号
+(electric-indent-mode -1) ;; 禁用该模式，否则在按回车换行时，上一行会缩进比较多
 ;; 状态栏颜色配置
 ;(set-face-foreground 'mode-line "#000000")
 (set-face-background 'mode-line "#e5e5e5")
@@ -70,12 +71,11 @@
       backup-directory-alist `((".*" ., backup-dir))	     ; 自动备份目录
       auto-save-file-name-transforms `((".*", backup-dir t)) ; 自动保存目录
       lock-file-name-transforms `((".*" ,backup-dir  t))     ; 文件锁目录
-	  )
+)
 
 ;;=============================CEDET配置============================;;
 ;; CEDET
-(global-ede-mode 1)      ; 全局启用CEDET
-(semantic-mode 1)
-(semanticdb-enable-gnu-global-databases 'c-mode)
-(semanticdb-enable-gnu-global-databases 'c++-mode)
-;; (electric-indent-mode -1) ;; 禁用该模式，否则在按回车换行时，上一行会缩进比较多
+;; (global-ede-mode 1)      ; 全局启用CEDET
+;; (semantic-mode 1)
+;; (semanticdb-enable-gnu-global-databases 'c-mode)
+;; (semanticdb-enable-gnu-global-databases 'c++-mode)
