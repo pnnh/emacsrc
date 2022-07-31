@@ -47,3 +47,17 @@ eval "$(rbenv init - zsh)"
 [[ -s "$HOME/.xmake/profile" ]] && source "$HOME/.xmake/profile" # load xmake profile
 # <<< xmake <<<
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+# 查找/opt/homebrew目录下的pkg-config配置文件，macOS M1需要配置
+export PKG_CONFIG_PATH="$HOMEBREW_PREFIX/lib/pkgconfig"
+
+# 配置
+export LDFLAGS="-L/opt/homebrew/lib"
+export CFLAGS="-I/opt/homebrew/include"
+export CPPFLAGS="-I/opt/homebrew/include"
+export CXXFLAGS="-I/opt/homebrew/include"
+
+# pyenv相关配置，用以管理python的多个版本
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
