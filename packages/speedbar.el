@@ -8,7 +8,11 @@
 
 (use-package sr-speedbar
   :ensure t 
-  :config (setq speedbar-show-unknown-files t))
+  :config (setq speedbar-show-unknown-files t
+                sr-speedbar-right-side nil
+                sr-speedbar-width 25
+                dframe-update-speed t
+                speedbar-show-unknown-files t))
 
 ;; (custom-set-variables
 ;;  '(speedbar-supported-extension-expressions

@@ -8,7 +8,8 @@
  '(column-number-mode t)
  '(display-time-mode t)
  '(indent-tabs-mode t)
- '(global-display-line-numbers-mode t)
+ ; 全局显示行号，这里禁用，在终端下左侧会空白，不太好看
+ ;;'(global-display-line-numbers-mode t)
  '(large-file-warning-threshold nil)
  '(show-paren-mode t)
  '(indent-tabs-mode t)
@@ -36,8 +37,7 @@
 (setq warning-minimum-level :emergency)
 ;; 报警时不再出现警告图标
 (setq visible-bell nil)
-;; 设置默认字体
-(set-frame-font "Monaco 13")
+
 ;; 光标改成竖线
 (setq-default cursor-type 'bar)
 ; 设置将程序自动添加的配置写到别的文件
@@ -70,26 +70,26 @@
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
 ;;=============================编辑器自身配置============================;;
-; 加载基本配置
-(load-file (expand-file-name "packages/base.el" user-emacs-directory))
-; 快捷键配置，包括调用插件相关的快捷键
+;; 加载基本配置
+;(load-file (expand-file-name "packages/base.el" user-emacs-directory))
+;; 快捷键配置，包括调用插件相关的快捷键
 (load-file (expand-file-name "packages/shortcuts.el" user-emacs-directory))
-; 鼠标配置
+;; 鼠标配置
 (load-file (expand-file-name "packages/mouse.el" user-emacs-directory))
-; 工具栏配置
-(load-file (expand-file-name "packages/toolbar.el" user-emacs-directory))
-; 加载Native Compile配置 
+;; GUI相关配置
+(if (display-graphic-p) (load-file (expand-file-name "packages/gui.el" user-emacs-directory)))
+;; 加载Native Compile配置 
 (load-file (expand-file-name "packages/native-comp.el" user-emacs-directory)) 
 ;;=============================插件配置============================;;
-; company配置
+;; company配置
 (load-file (expand-file-name "packages/company.el" user-emacs-directory))
-; sr-speedbar配置
+;; sr-speedbar配置
 (load-file (expand-file-name "packages/speedbar.el" user-emacs-directory))
-; flycheck配置
+;; flycheck配置
 (load-file (expand-file-name "packages/flycheck.el" user-emacs-directory))
-; eglot C/C++ LSP Server配置
+;; eglot C/C++ LSP Server配置
 (load-file (expand-file-name "packages/eglot.el" user-emacs-directory))
-; counsel、ivy、swiper配置
+;; counsel、ivy、swiper配置
 (load-file (expand-file-name "packages/counsel.el" user-emacs-directory))
 ;; 其它插件集合配置
 (load-file (expand-file-name "packages/other.el" user-emacs-directory))

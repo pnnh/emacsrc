@@ -9,3 +9,5 @@ ido.last
 eshell/
 eln-cache/
 recentf
+# emacs生成的文件，形如custom.el~模式，以~结尾
+*~

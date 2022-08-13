@@ -1,33 +1,4 @@
 
-;;=============================窗口相关配置============================;;
-;; 设置窗口位置
-(set-frame-position (selected-frame) 240 120)
-
-; 设置启动时窗口的长宽
-; (setq initial-frame-alist '((width . 170) (height . 50)))
-; 默认窗口高度（设置对emacsclient也有效果）
-;(add-to-list 'default-frame-alist '(height . 50))
-; 默认窗口宽度（设置对emacsclient也有效果）
-;(add-to-list 'default-frame-alist '(width . 170))
-; 设置默认窗口宽高及位置（对emacsclient也有效果）
-;; (setq default-frame-alist
-;;        '((height . 50)
-;;          (width . 170)
-;;          (left . 240)
-;;          (top . 120)
-;;          ;(vertical-scroll-bars . nil)
-;;          ;(horizontal-scroll-bars . nil)
-;;          ;(tool-bar-lines . 0))
-;; ))
-
-;设置窗口宽和高
-(set-frame-width (selected-frame) 170)
-
-(if (eq system-type 'darwin)
-   (set-frame-height (selected-frame) 50))
-
-(if (eq system-type 'gnu/linux)
-   (set-frame-height (selected-frame) 50))
 
 ;;打开括号匹配显示模式
 (setq show-paren-mode t)
