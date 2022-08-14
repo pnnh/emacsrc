@@ -32,16 +32,21 @@
 
 
 ; 自动保存/备份有关配置
-(defvar backup-dir (expand-file-name "~/.emacs.d/backups/"))
+;(setq backup-directory-alist `(("." . "~/.saves")))
+;(defvar backup-dir (expand-file-name "~/.emacs.d/backups/"))
+;; (make-directory "~/.emacs.d/autosaves/" t)
+;; (make-directory "~/.emacs.d/backups/" t)
+;; (make-directory "~/.emacs.d/lockfiles/" t)
 (setq version-control t ; 多次备份
       kept-new-versions 3 ; 保留最近的3个备份文件
       kept-old-versions 2 ; 保留最早的2个备份文件
       delete-old-versions t ; 自动删除旧的备份文件
       backup-by-copying t ; 自动备份
+      delete-by-moving-to-trash t ; 移到回收站
       vc-make-backup-files t ; 使用版本控制时仍启用备份
-      backup-directory-alist `((".*" ., backup-dir))	     ; 自动备份目录
-      auto-save-file-name-transforms `((".*", backup-dir t)) ; 自动保存目录
-      lock-file-name-transforms `((".*" ,backup-dir  t))     ; 文件锁目录
+      backup-directory-alist `((".*" . ,temporary-file-directory))	     ; 自动备份目录
+      auto-save-file-name-transforms `((".*" ,temporary-file-directory t)) ; 自动保存目录
+      lock-file-name-transforms `((".*" ,temporary-file-directory  t))     ; 文件锁目录
 )
 
 ;;=============================CEDET配置============================;;

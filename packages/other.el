@@ -2,6 +2,9 @@
 ;;(message "开始配置其它插件")
 ;; 下方可以防止其它插件的配置
 
+(use-package cmake-mode
+ :ensure t)
+
 ;;（加载这个文件似乎会导致启动时间增加300多毫秒，先暂停）
 (use-package markdown-mode
  :ensure t

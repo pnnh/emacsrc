@@ -71,7 +71,7 @@
 
 ;;=============================编辑器自身配置============================;;
 ;; 加载基本配置
-;(load-file (expand-file-name "packages/base.el" user-emacs-directory))
+(load-file (expand-file-name "packages/base.el" user-emacs-directory))
 ;; 快捷键配置，包括调用插件相关的快捷键
 (load-file (expand-file-name "packages/shortcuts.el" user-emacs-directory))
 ;; 鼠标配置
