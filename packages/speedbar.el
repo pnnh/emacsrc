@@ -12,7 +12,8 @@
                 sr-speedbar-right-side nil
                 sr-speedbar-width 25
                 dframe-update-speed t
-                speedbar-show-unknown-files t))
+                speedbar-show-unknown-files t
+                speedbar-directory-unshown-regexp "^\\（CVS\\|RCS\\|SCCS\\|\\.\\.*$\\）\\'"))
 
 ;; (custom-set-variables
 ;;  '(speedbar-supported-extension-expressions

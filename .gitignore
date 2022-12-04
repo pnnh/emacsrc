@@ -11,3 +11,7 @@ eln-cache/
 recentf
 # emacs生成的文件，形如custom.el~模式，以~结尾
 *~
+.dap-breakpoints
+.lsp-session-v1
+.cache/
+ede-projects.el

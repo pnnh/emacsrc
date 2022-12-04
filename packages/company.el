@@ -6,6 +6,10 @@
 ;;(setq company-show-numbers t)
 (use-package company
   :ensure t
-  :hook (after-init-hook . global-company-mode)
+  :init (global-company-mode)
+  ;;:hook (after-init-hook . global-company-mode)
   :config (setq company-minimum-prefix-length 1
     company-idle-delay 0))
+
+(use-package company-qml
+  :ensure t)

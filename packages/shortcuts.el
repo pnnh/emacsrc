@@ -31,3 +31,5 @@
 ; 快速打开speedbar，查看文件大纲
 ;;(global-set-key (kbd "<f2>") 'sr-speedbar-toggle)
 (global-set-key (kbd "<f5>") (lambda() (interactive) (sr-speedbar-toggle)))
+;; 阻止ctrl+z后台应用（需通过fg返回）
+(global-unset-key (kbd "C-z"))

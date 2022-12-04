@@ -45,7 +45,9 @@
 (load custom-file)
 ;;======================包管理配置=====================;; 
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("stable" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
 (package-initialize)
 
 ; fetch the list of packages available 
@@ -93,6 +95,8 @@
 (load-file (expand-file-name "packages/counsel.el" user-emacs-directory))
 ;; 其它插件集合配置
 (load-file (expand-file-name "packages/other.el" user-emacs-directory))
+;; 开发语言配置
+(load-file (expand-file-name "packages/languages/golang.el" user-emacs-directory))
 ;;=============================程序生成的配置============================;;
 
 
