@@ -41,8 +41,8 @@
 ;; 光标改成竖线
 (setq-default cursor-type 'bar)
 ; 设置将程序自动添加的配置写到别的文件
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
+;; (setq custom-file "~/.emacs.d/custom.el")
+;; (load custom-file)
 ;;======================包管理配置=====================;; 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://stable.melpa.org/packages/") t)
@@ -94,9 +94,9 @@
 ;; counsel、ivy、swiper配置
 (load-file (expand-file-name "packages/counsel.el" user-emacs-directory))
 ;; 其它插件集合配置
-(load-file (expand-file-name "packages/other.el" user-emacs-directory))
+;; (load-file (expand-file-name "packages/other.el" user-emacs-directory))
 ;; 开发语言配置
-(load-file (expand-file-name "packages/languages/golang.el" user-emacs-directory))
+;; (load-file (expand-file-name "packages/languages/golang.el" user-emacs-directory))
 ;;=============================程序生成的配置============================;;
 
 
